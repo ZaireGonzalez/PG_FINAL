@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Agrícola - SISPOA</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+            color: #333;
+        }
+
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        nav {
+            display: flex;
+            background-color: #218838;
+            padding: 10px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav .logout-btn {
+            background: white;
+            color: #218838;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        nav .logout-btn:hover {
+            background: #1c6f31;
+            color: white;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        section {
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table thead {
+            background-color: #28a745;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tbody tr:nth-child(odd) {
+            background-color: #f3f3f3;
+        }
+
+        table tbody tr:hover {
+            background-color: #e9f7ea;
+        }
+
+        /* Pantalla de ingreso */
+        #login-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9fafb;
+        }
+
+        #login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        #login-box h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        #login-box h2 {
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #login-box button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #login-box button:hover {
+            background-color: #218838;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            table th, table td, #login-box input, #login-box button {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Pantalla de ingreso -->
+    <div id="login-screen">
+        <div id="login-box">
+            <h1>SISPOA</h1>
+            <h2>SISTEMA DE VENTA AGRÍCOLA</h2>
+            <input type="text" id="usuario" placeholder="Usuario" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button id="login-button">Ingresar</button>
+        </div>
+    </div>
+
+    <!-- Página principal -->
+    <header style="display: none;">Gestión Agrícola</header>
+    <nav style="display: none;">
+        <div>
+            <a href="#" data-module="venta">Venta</a>
+            <a href="#" data-module="anulacion">Anulación</a>
+            <a href="#" data-module="cierre">Cierre</a>
+            <a href="#" data-module="configuracion">Configuración</a>
+            <a href="#" data-module="proveedor">Proveedor</a>
+            <a href="#" data-module="inventario">Inventario</a>
+        </div>
+        <button class="logout-btn" id="logout-button">Cerrar Sesión</button>
+    </nav>
+    <main style="display: none;">
+        <!-- Módulo Venta -->
+        <section id="venta" class="active">
+            <h1>Ventas Registradas</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad (kg)</th>
+                        <th>Precio ($)</th>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tomate</td>
+                        <td>50</td>
+                        <td>200</td>
+                        <td>2024-11-15</td>
+                        <td>Juan Pérez</td>
+                    </tr>
+                    <tr>
+                        <td>Maíz</td>
+                        <td>100</td>
+                        <td>400</td>
+                        <td>2024-11-16</td>
+                        <td>María López</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Módulo Anulación -->
+        <section id="anulacion">
+            <h1>Ventas Anuladas</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad (kg)</th>
+                        <th>Precio ($)</th>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Motivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Manzana</td>
+                        <td>20</td>
+                        <td>100</td>
+                        <td>2024-11-12</td>
+                        <td>Carlos Ruiz</td>
+                        <td>Cancelación por cliente</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Módulo Cierre -->
+        <section id="cierre">
+            <h1>Resumen del Día</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Total Ventas ($)</th>
+                        <th>Total Productos Vendidos (kg)</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>600</td>
+                        <td>150</td>
+                        <td>2024-11-16</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Módulo Configuración -->
+        <section id="configuracion">
+            <h1>Configuración</h1>
+            <p>Aquí se mostrarán las opciones de configuración del sistema.</p>
+        </section>
+
+        <!-- Módulo Proveedor -->
+        <section id="proveedor">
+            <h1>Proveedores</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Producto Suministrado</th>
+                        <th>Contacto</th>
+                        <th>Dirección</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AgroSoluciones</td>
+                        <td>Fertilizantes</td>
+                        <td>+58 123 456 789</td>
+                        <td>Calle 123, Ciudad</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Módulo Inventario -->
+        <section id="inventario">
+            <h1>Inventario</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad Disponible (kg)</th>
+                        <th>Última Actualización</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Papa</td>
+                        <td>200</td>
+                        <td>2024-11-14</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        // Simulación de autenticación
+        const loginButton = document.getElementById('login-button');
+        const loginScreen = document.getElementById('login-screen');
+        const usuarioInput = document.getElementById('usuario');
+        const passwordInput = document.getElementById('password');
+        const header = document.querySelector('header');
+        const nav = document.querySelector('nav');
+        const main = document.querySelector('main');
+        const logoutButton = document.getElementById('logout-button');
+
+        loginButton.addEventListener('click', () => {
+            const usuario = usuarioInput.value;
+            const password = passwordInput.value;
+
+            // Verificación simulada (usuario: admin, contraseña: 1234)
+            if (usuario === 'admin' && password === '1234') {
+                alert('¡Bienvenido!');
+                loginScreen.style.display = 'none';
+                header.style.display = 'block';
+                nav.style.display = 'flex';
+                main.style.display = 'block';
+            } else {
+                alert('Usuario o contraseña incorrectos.');
+            }
+        });
+
+        // Cerrar sesión
+        logoutButton.addEventListener('click', () => {
+            alert('Sesión cerrada.');
+            loginScreen.style.display = 'flex';
+            header.style.display = 'none';
+            nav.style.display = 'none';
+            main.style.display = 'none';
+        });
+
+        // Navegación entre módulos
+        const navLinks = document.querySelectorAll('nav a');
+        const sections = document.querySelectorAll('section');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                const module = link.getAttribute('data-module');
+
+                // Cambiar la sección activa
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(module).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
